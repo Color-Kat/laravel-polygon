@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\BlogPost;
+use Database\Factories\BlogPostFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,5 +21,9 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             BlogCategoriesTableSeeder::class
         ]);
+
+        // We can use both variants of seeding
+        BlogPost::factory()->count(10)->create();
+//        BlogPostFactory::new()->count(10)->create();
     }
 }
