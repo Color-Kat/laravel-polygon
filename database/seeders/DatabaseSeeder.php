@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // We can use both variants of seeding
-        BlogPost::factory()->count(10)->create();
+        BlogPost::factory()->count(100)->create();
 //        BlogPostFactory::new()->count(10)->create();
     }
 }
