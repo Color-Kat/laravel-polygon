@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
@@ -55,33 +56,33 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\BlogCategoryUpdateRequest  $request
      * @param  int  $id
      */
-    public function update(Request $request, $id)
+    public function update(BlogCategoryUpdateRequest $request, $id)
     {
         // Validation
-        $rules = [
+        /* $rules = [
             'title' => 'required|min:5|max:200',
             'slug' => 'max:200',
             'description' => 'string|min:3|max:500',
             'parent_id' => 'integer|required|exists:blog_categories,id'
-        ];
+        ]; */
 
         // 1.
 //        $validatedData = $this->validate($request, $rules);
 
         // 2.
-        $validatedData = $request->validate($rules);
+//        $validatedData = $request->validate($rules);
 
         // 3.
-//        $validator = \Validator::make($request->all(), $rules);
-//        $validatedData['passes'] = $validator->passes();
-//        $validatedData['valid'] = $validator->valid();
-//        $validatedData['failed'] = $validator->failed();
-//        $validatedData['errors'] = $validator->errors();
-//        $validatedData['fails'] = $validator->fails();
-//        $validatedData['validate'] = $validator->validate();
+        /* $validator = \Validator::make($request->all(), $rules);
+        $validatedData['passes'] = $validator->passes();
+        $validatedData['valid'] = $validator->valid();
+        $validatedData['failed'] = $validator->failed();
+        $validatedData['errors'] = $validator->errors();
+        $validatedData['fails'] = $validator->fails();
+        $validatedData['validate'] = $validator->validate(); */
 
 //        dd($validatedData);
 
