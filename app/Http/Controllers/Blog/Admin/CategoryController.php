@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BlogCategoryCreateRequest;
 use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -22,22 +24,45 @@ class CategoryController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $item = new BlogCategory();
+        $categoryList = BlogCategory::all();
+
+        return view('blog.admin.categories.create', compact('item', 'categoryList'));
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\BlogCategoryCreateRequest  $request
      */
-    public function store(Request $request)
+    public function store(BlogCategoryCreateRequest $request)
     {
-        //
+        $data = $request->input();
+
+        // Generate slug if it's empty
+        if(empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['title']);
+        }
+
+        // 1.
+        // $item = (new BlogCategory())->create($data);
+
+        // 2.
+        $item = new BlogCategory($data);
+        $item->save();
+
+        if($item->exists) {
+            return redirect()->route('blog.admin.categories.edit', [$item->id])
+                ->with(['success' => 'Успешно сохранено']);
+        } else {
+            return back()
+                ->withErrors(['message' => 'Не удалось сохранить'])
+                ->withInput();
+        }
     }
 
     /**
@@ -70,10 +95,10 @@ class CategoryController extends Controller
         ]; */
 
         // 1.
-//        $validatedData = $this->validate($request, $rules);
+        // $validatedData = $this->validate($request, $rules);
 
         // 2.
-//        $validatedData = $request->validate($rules);
+        // $validatedData = $request->validate($rules);
 
         // 3.
         /* $validator = \Validator::make($request->all(), $rules);
@@ -83,7 +108,6 @@ class CategoryController extends Controller
         $validatedData['errors'] = $validator->errors();
         $validatedData['fails'] = $validator->fails();
         $validatedData['validate'] = $validator->validate(); */
-
 //        dd($validatedData);
 
         $item = BlogCategory::find($id);
@@ -94,7 +118,14 @@ class CategoryController extends Controller
         }
 
         $data = $request->all();
-        $result = $item->fill($data)->save();
+
+        // Generate slug if it's empty
+        if(empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['title']);
+        }
+
+//        $result = $item->fill($data)->save();
+        $result = $item->update($data);
 
         if($result) {
             return redirect()

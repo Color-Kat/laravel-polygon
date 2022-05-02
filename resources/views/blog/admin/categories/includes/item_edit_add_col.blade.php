@@ -14,7 +14,6 @@
 </div>
 
 @if($item->exists)
-
     <div class="justify-content-center row mb-1">
         <div class="col-md-12">
             <div class="card">
@@ -49,5 +48,4 @@
             </div>
         </div>
     </div>
-
 @endif
