@@ -28,13 +28,14 @@ abstract class CoreRepository
     }
 
     /**
-     * Save model class
+     * Define model class
      *
      * @return string
      */
     abstract protected function getModelClass(): string;
 
     protected function startConditions() {
+        // Clone model to don't save model state
         return clone $this->model;
     }
 }
