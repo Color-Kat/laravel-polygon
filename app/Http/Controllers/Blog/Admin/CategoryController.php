@@ -2,23 +2,32 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogCategoryCreateRequest;
 use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\BlogCategory;
-use App\Models\BlogPost;
 use App\Repositories\BlogCategoryRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
+    /**
+     * @var BlogCategoryRepository
+     */
+    private BlogCategoryRepository $blogCategoryRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $paginator = BlogCategory::paginate(5);
+        $paginator = $this->blogCategoryRepository->getAllWithPaginate(5);
 
         return view('blog.admin.categories.index', compact('paginator'));
     }
@@ -29,7 +38,7 @@ class CategoryController extends Controller
     public function create()
     {
         $item = new BlogCategory();
-        $categoryList = BlogCategory::all();
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
 
         return view('blog.admin.categories.create', compact('item', 'categoryList'));
 

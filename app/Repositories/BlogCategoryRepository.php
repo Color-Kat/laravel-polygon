@@ -26,8 +26,46 @@ class BlogCategoryRepository extends CoreRepository
         return $this->startConditions()->find($id);
     }
 
+    /**
+     * Get categories list for combo box (select)
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function getForComboBox()
     {
-        return $this->startConditions()->all();
+//        return $this->startConditions()->all();
+        $columns = implode(', ', [
+           'id',
+           'CONCAT(id, ". ", title) as id_title'
+        ]);
+
+        $result[] = $this
+            ->startConditions()
+            ->select(
+                'blog_categories.id',
+                \DB::raw('CONCAT(id, ". ", title) as id_title')
+            )
+            ->toBase()
+            ->get();
+
+        $result[] = $this
+            ->startConditions()
+            ->selectRaw($columns)
+            ->toBase()
+            ->get();
+
+
+        dd($result);
+
+        return [];
+    }
+
+    public function getAllWithPaginate(int $perPage = 5) {
+        $columns = ['id', 'title', 'parent_id'];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->paginate($perPage);
+
+        return $result;
     }
 }

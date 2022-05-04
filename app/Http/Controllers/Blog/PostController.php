@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Blog;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 
-class PostControllerGuest extends GuestBaseController
+class PostController extends BaseController
 {
     /**
      * Display a listing of the resource.

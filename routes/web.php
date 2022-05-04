@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Blog\Admin\CategoryController;
-use App\Http\Controllers\Blog\PostControllerGuest;
+use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\RestTestController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // ----- BLOG ----- //
 
 Route::group(["prefix" => "blog"], function() {
-    Route::resource('posts', PostControllerGuest::class)->names('blog.posts');
+    Route::resource('posts', PostController::class)->names('blog.posts');
 });
 
 // --- Blog Admin
