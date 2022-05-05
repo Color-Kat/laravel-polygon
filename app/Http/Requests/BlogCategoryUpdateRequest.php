@@ -25,7 +25,7 @@ class BlogCategoryUpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|min:5|max:200',
-            'slug' => 'unique:blog_categories,slug|max:200',
+            'slug' => 'max:200',
             'description' => 'string|min:3|max:500',
             'parent_id' => 'integer|required|exists:blog_categories,id'
         ];
@@ -43,7 +43,6 @@ class BlogCategoryUpdateRequest extends FormRequest
             'title.max' => 'Длина заголовка должна быть от 5 до 200 символов',
             'title.required' => 'Длина заголовка должна быть от 5 до 200 символов',
             'slug.max' => 'Длина идентификатора должна быть менее 200 символов',
-            'slug.unique' => 'Такой идентификатор уже занят',
             'description.min' => 'Описание должно быть от 3 до 500 символов',
             'description.max' => 'Описание должно быть от 3 до 500 символов',
             'parent_id.integer' => 'Указан неправильный родитель',

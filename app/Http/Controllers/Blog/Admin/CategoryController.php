@@ -127,7 +127,9 @@ class CategoryController extends BaseController
         $validatedData['validate'] = $validator->validate(); */
 //        dd($validatedData);
 
-        $item = BlogCategory::find($id);
+//        $item = BlogCategory::find($id);
+        $item = $this->blogCategoryRepository->getEdit($id);
+
         if(empty($item)){
             return back()
                 ->withErrors(['message' => "Запись с id=$id не найдена"])
