@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Blog\Admin\CategoryController;
 use App\Http\Controllers\Blog\PostController;
-use App\Http\Controllers\RestTestController;
+use App\Http\Controllers\Blog\Admin\PostController as AdminPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +43,10 @@ Route::group($adminGroupData, function(){
     Route::resource('categories', CategoryController::class)
         ->only($methods)
         ->names('blog.admin.categories');
+
+    Route::resource('posts', AdminPostController::class)
+        ->except(['show'])
+        ->names('blog.admin.posts');
 });
 
 

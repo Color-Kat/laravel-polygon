@@ -10,7 +10,6 @@ class BlogCategoryRepository extends CoreRepository
      * Define model class
      * @return string
      */
-
     protected function getModelClass(): string
     {
         return BlogCategory::class;
