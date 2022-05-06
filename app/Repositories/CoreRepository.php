@@ -5,6 +5,8 @@ namespace App\Repositories;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+
 
 /**
  * Class CoreRepository
@@ -17,10 +19,11 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class CoreRepository
 {
+
     /**
-     * @var Model
+     * @mixin Builder|Model
      */
-    protected Model $model;
+    protected Builder|Model $model;
 
     public function __construct()
     {
@@ -34,7 +37,10 @@ abstract class CoreRepository
      */
     abstract protected function getModelClass(): string;
 
-    protected function startConditions() {
+    /**
+     * @return Builder|Model
+     */
+    protected function startConditions(): Builder|Model {
         // Clone model to don't save model state
         return clone $this->model;
     }

@@ -21,12 +21,12 @@ class PostController extends BaseController
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('blog.admin.posts.index');
+        $paginator = $this->blogPostRepository->getAllWithPaginate();
+
+        return view('blog.admin.posts.index', compact('paginator'));
     }
 
     /**
