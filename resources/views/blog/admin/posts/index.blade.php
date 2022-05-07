@@ -26,8 +26,8 @@
                                 @php /** @var \App\Models\BlogPost $item */ @endphp
                                 <tr @if(!$item->is_published) style="background: #ccc" @endif>
                                     <td>{{$item->id}}</td>
-                                    <td>{{$item->user_id}}</td>
-                                    <td>{{$item->category_id}}</td>
+                                    <td>{{$item->user->name}}</td>
+                                    <td>{{$item->category->title}}</td>
                                     <td>
                                         <a href="{{route('blog.admin.posts.edit', $item->id)}}" class="link-primary">{{$item->title}}</a>
                                     </td>

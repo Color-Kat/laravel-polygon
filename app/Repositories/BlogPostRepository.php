@@ -35,6 +35,7 @@ class BlogPostRepository extends CoreRepository
             'slug',
             'is_published',
             'published_at',
+            // For relations we need to get ids
             'user_id',
             'category_id',
         ];
@@ -42,6 +43,13 @@ class BlogPostRepository extends CoreRepository
         $result = $this->startConditions()
             ->select($column)
             ->orderBy('id', 'DESC')
+//                ->with(['user', 'category']) // load all columns
+                ->with([
+                    'category' => function($query) {
+                        $query->select(['id', 'title']); // Load also id to laravel can find it
+                    },
+                    'user:id,name'
+                ])
             ->paginate(25);
 
         return $result;

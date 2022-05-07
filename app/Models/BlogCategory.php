@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BlogCategory extends Model
 {
-    use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [

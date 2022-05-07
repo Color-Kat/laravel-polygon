@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                'name'              => "Автор не известен",
+                'name'              => "Автор неизвестен",
                 'email'             => "unknown_author@color.com",
                 'email_verified_at' => now(),
                 'password'          => bcrypt(Str::random()),
