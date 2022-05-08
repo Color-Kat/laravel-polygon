@@ -2,7 +2,7 @@
 
 @section('content')
     @php
-        /** @var \App\Models\BlogPost $item */
+        /** @var \App\Models\BlogCategory $item */
         /** @var \Illuminate\Support\ViewErrorBag $errors */
     @endphp
 

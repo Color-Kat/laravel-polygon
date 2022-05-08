@@ -8,6 +8,11 @@ use App\Models\BlogCategory;
 use App\Repositories\BlogCategoryRepository;
 use Illuminate\Support\Str;
 
+/**
+ * Class CategoryController
+ * @package App\Http\Controllers\Blog\Admin
+ */
+
 class CategoryController extends BaseController
 {
     /**

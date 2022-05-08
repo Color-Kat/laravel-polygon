@@ -54,4 +54,14 @@ class BlogPostRepository extends CoreRepository
 
         return $result;
     }
+
+    /**
+     * Get model for edit in admin
+     *
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Model[]|null
+     */
+    public function getEdit(int $id) {
+        return $this->startConditions()->find($id);
+    }
 }
