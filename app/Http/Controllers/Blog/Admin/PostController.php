@@ -99,7 +99,7 @@ class PostController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -110,6 +110,6 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        dd('delete');
     }
 }

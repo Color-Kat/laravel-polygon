@@ -41,8 +41,8 @@
                     </div>
 
                     <div class="form-group">
-                        <lavel for="title">Удалено</lavel>
-                        <input type="text" value="{{$item->deleted_at}}" class="form-control" disabled>
+                        <lavel for="title">Опубликовано</lavel>
+                        <input type="text" value="{{$item->published_at}}" class="form-control" disabled>
                     </div>
                 </div>
             </div>

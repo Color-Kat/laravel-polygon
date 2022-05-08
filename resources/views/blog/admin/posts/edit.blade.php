@@ -3,6 +3,7 @@
 @section('content')
     @php
         /** @var \App\Models\BlogPost $item */
+        /** @var \Illuminate\Database\Eloquent\Collection $categoryList */
     @endphp
 
     <div class="container">
