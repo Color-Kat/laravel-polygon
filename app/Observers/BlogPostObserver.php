@@ -8,22 +8,29 @@ use Carbon\Carbon;
 class BlogPostObserver
 {
     /**
+     * Handle the BlogPost "creating" event.
+     * Runs before create
+     *
+     * @param BlogPost $blogPost
+     */
+    public function creating(BlogPost $blogPost) {
+        $this->setPublishedAt($blogPost);
+        $this->setSlug($blogPost);
+    }
+
+    /**
      * Handle the BlogPost "updating" event.
      * Runs before update
      *
      * @param BlogPost $blogPost
      */
     public function updating(BlogPost $blogPost) {
-//        if(empty($data['slug']))
-//            $data['slug'] = \Str::slug($data['title']);
-//
-//        if(empty($item->published_at) && $data['is_published'])
-//            $data['published_at'] = Carbon::now();
         $this->setPublishedAt($blogPost);
         $this->setSlug($blogPost);
     }
 
     /**
+     * Set published_at if there is not published_at and it is_published
      *
      * @param BlogPost $blogPost
      */
@@ -34,6 +41,7 @@ class BlogPostObserver
     }
 
     /**
+     * Generate slug by title if it's empty
      *
      * @param BlogPost $blogPost
      */

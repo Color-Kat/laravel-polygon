@@ -6,7 +6,11 @@
     <div class="justify-content-center row">
         <div class="col-md-11">
             <div class="alert alert-danger" role="alert">
-                {{$errors->first()}}
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

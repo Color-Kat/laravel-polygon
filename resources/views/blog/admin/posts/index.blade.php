@@ -4,8 +4,8 @@
     <div class="container">
         <div class="justify-content-center row">
             <div class="col-md-12">
-                <button class="btn-primary rounded-3 p-1 px-3 mb-2">
-                    <a class="link-light" href="{{ route('blog.admin.posts.create') }}">Написать</a>
+                <button class="btn-primary rounded p-1 px-3 mb-2">
+                    <a class="text-light" href="{{ route('blog.admin.posts.create') }}">Написать</a>
                 </button>
 
                 <div class="card">
