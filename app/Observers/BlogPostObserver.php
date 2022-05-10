@@ -9,9 +9,9 @@ class BlogPostObserver
 {
     /**
      * Handle the BlogPost "updating" event.
-     * Runs before update method
+     * Runs before update
      *
-     * @param BlogPost $blogPos
+     * @param BlogPost $blogPost
      */
     public function updating(BlogPost $blogPost) {
 //        if(empty($data['slug']))

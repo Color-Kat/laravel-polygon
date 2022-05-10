@@ -44,6 +44,7 @@ class BlogCategoryUpdateRequest extends FormRequest
             'title.required' => 'Длина заголовка должна быть от 5 до 200 символов',
             'slug.max' => 'Длина идентификатора должна быть менее 200 символов',
             'description.min' => 'Описание должно быть от 3 до 500 символов',
+            'description.string' => 'Описание должно быть от 3 до 500 символов',
             'description.max' => 'Описание должно быть от 3 до 500 символов',
             'parent_id.integer' => 'Указан неправильный родитель',
             'parent_id.required' => 'Родитель не указан',

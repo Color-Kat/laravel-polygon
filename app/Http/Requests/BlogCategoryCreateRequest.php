@@ -45,6 +45,7 @@ class BlogCategoryCreateRequest extends FormRequest
             'slug.max'           => 'Длина идентификатора должна быть менее 200 символов',
             'slug.unique'        => 'Такой идентификатор уже занят',
             'description.min'    => 'Описание должно быть от 3 до 500 символов',
+            'description.string' => 'Описание должно быть от 3 до 500 символов',
             'description.max'    => 'Описание должно быть от 3 до 500 символов',
             'parent_id.integer'  => 'Указан неправильный родитель',
             'parent_id.required' => 'Родитель не указан',

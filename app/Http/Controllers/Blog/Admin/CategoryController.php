@@ -58,14 +58,15 @@ class CategoryController extends BaseController
     {
         $data = $request->input();
 
-        // Generate slug if it's empty
+        /*
+         * Now in observer. Generate slug if it's empty
         if(empty($data['slug'])) {
             $data['slug'] = Str::slug($data['title']);
         }
+        */
 
         // 1.
-        // $item = (new BlogCategory())->create($data);
-
+        //  - $item = (new BlogCategory())->create($data);
         // 2.
         $item = new BlogCategory($data);
         $item->save();
@@ -88,6 +89,7 @@ class CategoryController extends BaseController
      */
     public function edit(int $id, BlogCategoryRepository $categoryRepository)
     {
+//        In repository
 //        $item = BlogCategory::findOrFail($id);
 //        $categoryList = BlogCategory::all();
 
@@ -143,12 +145,12 @@ class CategoryController extends BaseController
 
         $data = $request->all();
 
-        // Generate slug if it's empty
-        if(empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
+        // Now in observer. Generate slug if it's empty
+        // if(empty($data['slug'])) {
+        // $data['slug'] = Str::slug($data['title']);
+        // }
 
-//        $result = $item->fill($data)->save();
+        // 1. $result = $item->fill($data)->save();
         $result = $item->update($data);
 
         if($result) {
