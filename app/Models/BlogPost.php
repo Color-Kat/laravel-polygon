@@ -11,6 +11,8 @@ class BlogPost extends Model
     use HasFactory;
     use SoftDeletes; // If in migration we have softDeletes
 
+    const UNKNOWN_USER = 1;
+
     protected $fillable = [
         'title',
         'slug',

@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="form-group">
-                            <lavel for="slug">Индетификатор</lavel>
+                            <lavel for="slug">Идетификатор</lavel>
                             <input
                                 name="slug"
                                 value="{{old('slug', $item->slug)}}"

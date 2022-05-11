@@ -70,7 +70,7 @@ class PostController extends BaseController
 
         if($item) {
             return redirect()
-                ->route('blog.admin.posts.edit')
+                ->route('blog.admin.posts.edit', $item->id)
                 ->with(['success' => 'Статья успешно создана']);
         } else {
             return back()
