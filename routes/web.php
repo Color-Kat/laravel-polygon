@@ -24,16 +24,17 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Route::resource('rest', RestTestController::class)->names('restTest');
+Route::group(['prefix' => 'learning'], function() {
+    Route::get('collections', [\App\Http\Controllers\LearningController::class, 'collections'])
+        ->name('learning.collections');
+});
 
 // ----- BLOG ----- //
-
 Route::group(["prefix" => "blog"], function() {
     Route::resource('posts', PostController::class)->names('blog.posts');
 });
 
 // --- Blog Admin
-
 $adminGroupData = [
     'prefix' => 'admin/blog'
 ];
