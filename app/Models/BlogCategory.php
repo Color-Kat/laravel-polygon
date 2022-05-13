@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -44,14 +43,15 @@ class BlogCategory extends Model
     /**
      * It's Accessor
      *
-     * @return string
+     * @return Attribute
      */
-    public function getParentTitleAttribute()
+    public function parentTitle(): Attribute
     {
-        $title = $this->parentCategory->title ??
-            ($this->isRoot() ? 'Корень' : 'Нет родителя');
-
-        return $title;
+        return new Attribute(
+            get: fn($Value) =>
+                $this->parentCategory->title ??
+                ($this->isRoot() ? 'Корень' : 'Нет родителя')
+        );
     }
 
     /**
@@ -74,7 +74,8 @@ class BlogCategory extends Model
 //    }
 
     // ----- Laravel 9 way to mutators ----- /
-    public function title(): Attribute{
+    public function title(): Attribute
+    {
         return new Attribute(
             get: fn($value) => ucwords($value),
             set: fn($value) => mb_strtolower($value)
