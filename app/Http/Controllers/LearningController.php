@@ -51,7 +51,35 @@ class LearningController extends Controller
         // transform is like map but it change $collection instead create new collection
         // $collection->transform(function (array $item) {return '123';});
 
-        dd(__METHOD__, 'result', $collection);
+        $newItem1 = [
+            "id" => 1111
+        ];
+
+        $newItem2 = [
+            "id" => 9999
+        ];
+
+        // Add in start, end
+//        $collection->prepend($newItem1);
+//        $collection->push($newItem2);
+
+        // Pull get element to variable and delete it in collection
+        $result['pooled'] = $collection->pull(0);
+
+
+        $result['filtered'] = $collection->filter(function ($item) {
+            $byDay = (new \Carbon\Carbon($item['created_at']))->isFriday();
+            $byDate = (new \Carbon\Carbon($item['created_at']))->day == 11;
+
+            $result = $byDate && $byDay;
+
+            return $result;
+        });
+
+        $result['sortBy'] = $collection->sortBy('created_at');
+        $result['sortByDesc'] = $collection->sortByDesc('id');
+
+        dd(__METHOD__, 'result', $result);
 
 
         return '123';
