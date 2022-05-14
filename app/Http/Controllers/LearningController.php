@@ -32,7 +32,26 @@ class LearningController extends Controller
         $result['where']['isEmpty'] = $result['where']['data']->isEmpty();
         $result['where']['isNotEmpty'] = $result['where']['data']->isNotEmpty();
 
-        dd(__METHOD__, 'result', $result);
+        $result['where']['firstWhere'] = $collection->firstWhere('user_id', '=', '1');
+        $result['where']['where->first'] = $collection->where('user_id', '=', '1')->first();
+
+        // $collection isn't changed, just return new collection
+        $result['map']['all'] = $collection->map(function (array $item) {
+           $newItem = new \stdClass();
+           $newItem->item_id = $item['id'];
+           $newItem->item_name = $item['title'];
+           $newItem->item_exists = is_null($item['deleted_at']);
+
+           return $newItem;
+        });
+        $result['map']['not_exists'] = $result['map']['all']
+            ->where('item_exists', '=', false)
+            ->keyBy('item_id');
+
+        // transform is like map but it change $collection instead create new collection
+        // $collection->transform(function (array $item) {return '123';});
+
+        dd(__METHOD__, 'result', $collection);
 
 
         return '123';
