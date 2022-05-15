@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Requests\BlogPostCreateRequest;
 use App\Http\Requests\BlogPostUpdateRequest;
+use App\Jobs\BlogPostAfterCreateJob;
+use App\Jobs\BlogPostAfterDeleteJob;
 use App\Models\BlogPost;
 use App\Repositories\BlogCategoryRepository;
 use App\Repositories\BlogPostRepository;
@@ -61,7 +63,7 @@ class PostController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\BlogPostCreateRequest  $request
+     * @param \App\Http\Requests\BlogPostCreateRequest  $request
      */
     public function store(BlogPostCreateRequest $request)
     {
@@ -69,6 +71,9 @@ class PostController extends BaseController
         $item = (new BlogPost())->create($data);
 
         if($item) {
+            $job = new BlogPostAfterCreateJob($item);
+            $this->dispatch($job);
+
             return redirect()
                 ->route('blog.admin.posts.edit', $item->id)
                 ->with(['success' => 'Статья успешно создана']);
@@ -157,6 +162,8 @@ class PostController extends BaseController
 //        $result = BlogPost::find($id)->forceDelete();
 
         if($result) {
+            BlogPostAfterDeleteJob::dispatch($id)->delay(20);
+
             return redirect()
                 ->route('blog.admin.posts.index')
                 ->with(['success' => 'Запись удалена']);
